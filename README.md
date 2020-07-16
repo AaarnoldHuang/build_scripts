@@ -13,7 +13,7 @@ git clone https://github.com/raysenlau/build_patches.git patches
 git clone https://github.com/raysenlau/build_scripts.git build_scripts
 
 # run build scripts
-bash build_scripts/build_davinci
+bash build_scripts/build_davinci.sh
 ```
 
 ## Links:
