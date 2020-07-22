@@ -22,24 +22,6 @@ function sync_repo() {
     repo sync -c -j$(nproc --all) --force-sync --no-clone-bundle --no-tags
 }
 
-function clone_or_checkout() {
-    local dir="$1"
-    local repo="$2"
-    local branch="$3"
-
-    if [[ -d "$dir" ]];then
-        git -C "$dir" fetch https://github.com/raysenlau/"$repo" && git -C "$dir" checkout FETCH_HEAD
-    else
-        git clone https://github.com/raysenlau/"$repo" "$dir"
-    fi
-}
-
-function sync_origin() {
-    echo -e "\033[01;33m\nSync origin device tree... \033[0m"
-    clone_or_checkout device/xiaomi/davinci android_device_xiaomi_davinci
-    clone_or_checkout device/xiaomi/sm6150-common android_device_xiaomi_sm6150-common
-}
-
 function apply_patches() {
     echo -e "\033[01;33m\nApplying patches... \033[0m"
     bash "$(dirname "$0")/apply-patches.sh" patches
@@ -81,7 +63,7 @@ function buildsigned() {
 
     DATE_END=$(date +"%s")
     DIFF=$(($DATE_END - $DATE_START))
-    echo -e "\033[01;32m#### Build Completed Successfully ($(($DIFF / 3600)):$(($(($DIFF % 3600)) / 60)):$(($DIFF % 60)) (hh:mm:ss)) #### \033[0m"
+    echo -e "\033[01;32m\n#### Build Completed Successfully ($(($DIFF / 3600)):$(($(($DIFF % 3600)) / 60)):$(($DIFF % 60)) (hh:mm:ss)) #### \033[0m"
 }
 
 function buildbacon() {
@@ -95,7 +77,6 @@ if [[ $choice_sync == *"y"* ]]; then
     init_local_repo
     init_main_repo
     sync_repo
-    sync_origin
     apply_patches
 fi
 

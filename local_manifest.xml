@@ -39,4 +39,10 @@
 <!-- PE pataches for davinci -->
 <project path="patches" name="build_patches" remote="ray" revision="pe-10.0" />
 
+<!-- sm6150-common tree -->
+<project path="device/xiaomi/sm6150-common" name="android_device_xiaomi_sm6150-common" remote="ray" revision="pe-10.0" />
+
+<!-- davinci device tree -->
+<project path="device/xiaomi/davinci" name="android_device_xiaomi_davinci" remote="ray" revision="pe-10.0" />
+
 </manifest>
